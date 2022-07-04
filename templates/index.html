@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script defer src="../static/app.js"></script>
+
+  <title>To-Do List</title>
+
+
+</head>
+<style>
+  body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
+  .List-Box {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+  }
+</style>
+<body>
+<h1>Simple To-Do List</h1>
+  <div>
+    <input type="text" placeholder="To-Do List를 입력하세요">
+    <button onclick="add_list()" >추가</button>
+  </div>
+
+  <div class="List-Box">
+    <li>1번 리스트</li>
+    <button onclick="done_list()">완료</button>
+    <button onclick="delete_list()">삭제</button>
+    <button onclick="edit_list()">수정</button>
+  </div>
+
+</body>
+</html>
