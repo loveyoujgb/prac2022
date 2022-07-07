@@ -47,24 +47,13 @@ def delete_post():
   db.todo.delete_one({'number': int(delete_receive)})
   return jsonify({'msg': '삭제 완료!'})
 
-# 5. 리스트 수정 버튼 GET 요청
-@app.route("/todo/edit", methods=["POST"])
-def edit_get():
-  number_receive = request.form['number_give']
-  print(number_receive)
-  a_list = list(db.todo.find({}, {'_id': False}))
-  print(a_list)
-  return jsonify({'list_number': a_list})
-
-# 6. 리스트 수정탭 안에서 취소시 POST 요청
+# 5. 리스트 수정 시 POST 요청
 @app.route("/todo/success", methods=["POST"])
 def out_post():
   number_receive = request.form['number_give']
   change_receive = request.form['change_give']
   db.todo.update_one({'number': int(number_receive)}, {'$set': {'list': change_receive}})
   return jsonify({'msg': '수정 완료!'})
-
-
 
 if __name__ == '__main__':
   app.run('0.0.0.0', port=5000, debug=True)

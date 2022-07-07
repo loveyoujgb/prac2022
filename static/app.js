@@ -14,11 +14,10 @@ $.ajax({
             let number = todolist[i]['number']
             let list = todolist[i]['list']
             let done = todolist[i]['done']
-
             let temp_html = ``
             if (done == 0) {
-                temp_html= `<ul id ="edit" class="delete">
-                              <li>${list}</li>                      	
+                temp_html= `<ul class="delete">
+                              <li id=${number}>${list}</li>                      	
 	                	<button onclick="done_list(${number})">완료</button>
                         <button onclick="edit_list(${number})">수정</button>
                         <button onclick="delete_list(${number})">삭제</button>
@@ -35,8 +34,6 @@ $.ajax({
         }
     });
 }
-
-
 
 // 2. 리스트 추가 시 POST 요청
 function add_list() {
@@ -87,8 +84,6 @@ function delete_list(number) {
             url: '/todo/delete',
             data: {delete_give: number},
         success: function (response) {
-                window.location.reload()
-            $("#delete").hide();
             alert(response["msg"])
             window.location.reload()
             }
@@ -96,37 +91,25 @@ function delete_list(number) {
         }else{}
 }
 
-// 5. 리스트 수정 버튼 GET 요청
+// 리스트 수정 버튼 클릭 시
 function edit_list(number){
-    $.ajax({
-        type: 'POST',
-        url: '/todo/edit',
-        data: {number_give: number},
-        success: function (response) {
-            select_list = (response['list_number'])
-            for(i=0; i<select_list.length; i++){
-                if(select_list[i]['number']==number) {
-                    let the_list = select_list[i]['list']
-                    let temp_html = `<div class=input >
-                                 <input id="edit_input" type="text" placeholder="${the_list}">
-                                 <button onclick="edit_success(${number})">수정완료</button>
-                                 <button onclick="clickout()">취소</button>
-                                 </div>
-                                `
-                    $("#edit").hide();
-                    $('#edit').after(temp_html)
-                } else {}
-            }
-    }})
+    let list = document.getElementById(number).innerHTML
+    let temp_html =`<div id = "edit_input" className = input>
+                        <input id = "list_input" type = "text" placeholder = ${list} >
+                        <button onclick = "edit_success(${number})" > 수정 </button>
+                        <button onclick = "clickout()" > 취소 </button>
+                      </div>`
+    $('#edit').empty()
+    $('#edit').append(temp_html)
 }
 
 function clickout() {
     window.location.reload()
 }
 
-// 6. 리스트 수정 시 POST 요청
+// 5. 리스트 수정 시 POST 요청
 function edit_success(number) {
-    const change_list = $('#edit_input').val()
+    const change_list = $('#list_input').val()
     $.ajax({
         type: 'POST',
         url: '/todo/success',
