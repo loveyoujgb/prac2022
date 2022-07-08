@@ -28,7 +28,7 @@
     justify-content: center;
   }
 
-  .List-Box {
+  .listBox {
     width: 90%;
     max-width: 550px;
     display: flex;
@@ -37,7 +37,7 @@
     justify-content: center;
   }
 
-  .List-Box > ul {
+  .listBox > ul {
     display: flex;
     flex-direction: row;
   }
@@ -45,15 +45,14 @@
 </style>
 <body>
 <h1 id="h1">Simple To-Do List</h1>
-<div id ="edit">
-  <div class=input>
-    <input id="list_input" type="text" placeholder="To-Do List를 입력하세요">
-    <button onclick="add_list()">추가</button>
+<div class ="edit">
+  <div class="input">
+    <input id="listInput" type="text" placeholder="To-Do List를 입력하세요">
+    <button onclick="addList()">추가</button>
   </div>
 </div>
-
-<div id="todo_List" class="List-Box">
-</div>
+<ul id="todoList" class="listBox">
+</ul>
 
 </body>
 </html>

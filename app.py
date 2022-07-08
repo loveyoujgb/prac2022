@@ -18,13 +18,15 @@ def todo_get():
 # 2. 리스트 추가 시 POST 요청
 @app.route("/todo", methods=["POST"])
 def list_post():
-  all_todo_list = list(db.todo.find({}, {'_id': False}))
-  numbers = len(all_todo_list)+1
+  import time
+  import datetime
+  datetime = datetime.datetime.now()
+  numbers = time.mktime(datetime.timetuple())
 
   list_receive = request.form['list_give']
   doc = {'list': list_receive,'number': int(numbers),'done':0}
   db.todo.insert_one(doc)
-  return jsonify({'msg': 'post 연결 완료!'})
+  return jsonify({'msg': '추가 완료!'})
 
 # 3. 리스트 완료 시 POST 요청
 @app.route("/todo/done", methods=["POST"])
